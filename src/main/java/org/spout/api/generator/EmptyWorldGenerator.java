@@ -26,6 +26,7 @@
 package org.spout.api.generator;
 
 
+import org.spout.api.geo.World;
 import org.spout.api.material.BlockMaterial;
 import org.spout.api.util.cuboid.CuboidShortBuffer;
 
@@ -41,4 +42,6 @@ public class EmptyWorldGenerator implements WorldGenerator {
 	public String getName() {
 		return "EmptyWorld";
 	}
+	
+	public void setWorld(World world) { }
 }

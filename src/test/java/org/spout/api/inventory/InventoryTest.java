@@ -34,8 +34,8 @@ public class InventoryTest {
 
 	private int size = 10;
 	private Inventory subject = new Inventory(size);
-	private ItemStack testing = new ItemStack(new Material("Testing", 1) {}, (short) 1, 1);
-	private ItemStack testing2 = new ItemStack(new Material("Testing2", 2) {}, (short) 3, 5);
+	private ItemStack testing = new ItemStack(new Material("Testing") {}, (short) 1, 1);
+	private ItemStack testing2 = new ItemStack(new Material("Testing2") {}, (short) 3, 5);
 
 	@Before
 	public void setUp() {
