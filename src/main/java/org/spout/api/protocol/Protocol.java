@@ -28,7 +28,9 @@ package org.spout.api.protocol;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class Protocol {
+import org.spout.api.player.Player;
+
+public abstract class Protocol {
 	private static final ConcurrentHashMap<String, Protocol> map = new ConcurrentHashMap<String, Protocol>();
 
 	private final CodecLookupService codecLookup;
@@ -78,6 +80,14 @@ public class Protocol {
 	public String getName() {
 		return name;
 	}
+
+	/**
+	 * Set up protocol-specific stuff for this player. This is mostly setting the network
+	 * synchronizer and controller for players.
+	 * @param player The player to be initialized
+	 * @param session The player's session
+	 */
+	public abstract void initializePlayer(Player player, Session session);
 
 	/**
 	 * Registers a Protocol for a particular id value

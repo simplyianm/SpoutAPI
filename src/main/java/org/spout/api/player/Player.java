@@ -92,13 +92,6 @@ public interface Player extends CommandSource, PermissionsSubject, DataSubject, 
 	public NetworkSynchronizer getNetworkSynchronizer();
 
 	/**
-	 * Gets the session associated with the Player.
-	 *
-	 * @return the session, or null if the player is offline
-	 */
-	public Session getSession();
-
-	/**
 	 * Gets if the player is online
 	 *
 	 * @return true if online

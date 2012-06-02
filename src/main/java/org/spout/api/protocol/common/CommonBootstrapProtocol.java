@@ -30,26 +30,28 @@ import java.io.UnsupportedEncodingException;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.spout.api.Spout;
+import org.spout.api.player.Player;
 import org.spout.api.protocol.CodecLookupService;
 import org.spout.api.protocol.HandlerLookupService;
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.Protocol;
+import org.spout.api.protocol.Session;
 import org.spout.api.protocol.bootstrap.BootstrapProtocol;
 import org.spout.api.protocol.common.message.CustomDataMessage;
 
 public class CommonBootstrapProtocol extends BootstrapProtocol {
-	
+
 	private final Protocol defaultProtocol;
 
 	public CommonBootstrapProtocol(Protocol defaultProtocol) {
 		this("CommonBootstrap", defaultProtocol);
 	}
 
-	
+
 	public CommonBootstrapProtocol(String name, Protocol defaultProtocol) {
 		this(name, new CommonBootstrapCodecLookupService(), new CommonBootstrapHandlerLookupService(), defaultProtocol);
 	}
-	
+
 	public CommonBootstrapProtocol(String name, CodecLookupService codecLookup, HandlerLookupService handlerLookup, Protocol defaultProtocol) {
 		super(name, codecLookup, handlerLookup);
 		this.defaultProtocol = defaultProtocol;
@@ -73,12 +75,12 @@ public class CommonBootstrapProtocol extends BootstrapProtocol {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public Protocol getDefaultProtocol() {
 		return defaultProtocol;
 	}
-	
+
 	/**
 	 * Reads a string from the buffer.
 	 * @param buf The buffer.
@@ -87,7 +89,7 @@ public class CommonBootstrapProtocol extends BootstrapProtocol {
 	 */
 	public static String readString(ChannelBuffer buf, int maxLength) {
 		int len = buf.readUnsignedShort();
-		
+
 		if (len > maxLength) {
 			Spout.getEngine().getLogger().severe("Maximum string length of " + maxLength + " exceeded (" + len + ")");
 			return null;
@@ -101,7 +103,7 @@ public class CommonBootstrapProtocol extends BootstrapProtocol {
 
 		return new String(characters);
 	}
-	
+
 	/**
 	 * Writes a string to the buffer.
 	 * @param buf The buffer.
@@ -121,4 +123,9 @@ public class CommonBootstrapProtocol extends BootstrapProtocol {
 		}
 	}
 
+	public void initializePlayer(Player player, Session session) {
+		if (defaultProtocol != null) {
+			defaultProtocol.initializePlayer(player, session);
+		}
+	}
 }
