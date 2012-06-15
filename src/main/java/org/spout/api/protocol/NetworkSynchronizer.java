@@ -47,7 +47,7 @@ import org.spout.api.inventory.InventoryViewer;
 import org.spout.api.material.BlockMaterial;
 import org.spout.api.math.IntVector3;
 import org.spout.api.math.Quaternion;
-import org.spout.api.player.Player;
+import org.spout.api.player.PlayerController;
 import org.spout.api.protocol.event.ProtocolEvent;
 import org.spout.api.protocol.event.ProtocolEventExecutor;
 import org.spout.api.protocol.event.ProtocolEventListener;
@@ -55,11 +55,11 @@ import org.spout.api.scheduler.TickStage;
 import org.spout.api.util.OutwardIterator;
 
 public abstract class NetworkSynchronizer implements InventoryViewer {
-	protected final Player owner;
+	protected final PlayerController owner;
 	protected Entity entity;
 	protected final Session session;
 
-	public NetworkSynchronizer(Player owner, Session session, Entity entity) {
+	public NetworkSynchronizer(PlayerController owner, Session session, Entity entity) {
 		this.owner = owner;
 		this.entity = entity;
 		entity.setObserver(true);
@@ -103,7 +103,7 @@ public abstract class NetworkSynchronizer implements InventoryViewer {
 		return entity;
 	}
 
-	public Player getOwner() {
+	public PlayerController getOwner() {
 		return owner;
 	}
 
@@ -316,7 +316,7 @@ public abstract class NetworkSynchronizer implements InventoryViewer {
 
 	private void addObserver(Chunk c) {
 		observed.add(c);
-		c.refreshObserver(owner.getEntity());
+		c.refreshObserver(owner.getParent());
 	}
 
 	private void removeObserver(Point p) {
@@ -329,7 +329,7 @@ public abstract class NetworkSynchronizer implements InventoryViewer {
 
 	private void removeObserver(Chunk c) {
 		observed.remove(c);
-		c.removeObserver(owner.getEntity());
+		c.removeObserver(owner.getParent());
 	}
 
 	private void checkChunkUpdates(Point currentPosition) {

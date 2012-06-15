@@ -27,20 +27,20 @@
 package org.spout.api.event.player;
 
 import org.spout.api.event.Event;
-import org.spout.api.player.Player;
+import org.spout.api.player.PlayerController;
 
 /**
  * Represents a player-related event.
  */
 public abstract class PlayerEvent extends Event {
 	
-	private final Player player;
+	private final PlayerController player;
 
-	public PlayerEvent(Player p) {
+	public PlayerEvent(PlayerController p) {
 		player = p;
 	}
 
-	public Player getPlayer() {
+	public PlayerController getPlayer() {
 		return player;
 	}
 }

@@ -34,7 +34,7 @@ import org.spout.api.entity.component.Controller;
 import org.spout.api.entity.component.controller.action.EntityAction;
 import org.spout.api.entity.component.controller.type.ControllerType;
 
-public abstract class ActionController extends Controller {
+public abstract class ActionController extends BasicController {
 	private List<EntityAction<Controller>> activeActions = new ArrayList<EntityAction<Controller>>();
 
 	protected ActionController(ControllerType type) {
@@ -57,7 +57,7 @@ public abstract class ActionController extends Controller {
 	@Override
 	public void onTick(float dt) {
 		for (EntityAction<Controller> ai : activeActions) {
-			if (ai.shouldRun(getParent(), this)) {
+			if (ai.shouldRun(getParent(), this, dt)) {
 				ai.run(getParent(), this, dt);
 			}
 		}

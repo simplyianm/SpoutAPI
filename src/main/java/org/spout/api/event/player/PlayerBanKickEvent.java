@@ -28,7 +28,7 @@ package org.spout.api.event.player;
 
 import org.spout.api.event.HandlerList;
 import org.spout.api.event.server.BanChangeEvent.BanType;
-import org.spout.api.player.Player;
+import org.spout.api.player.PlayerController;
 
 /**
  * Called when a player is kicked for being banned
@@ -39,7 +39,7 @@ public class PlayerBanKickEvent extends PlayerEvent {
 	private BanType type;
 	private String message;
 
-	public PlayerBanKickEvent(Player player, BanType type, String message) {
+	public PlayerBanKickEvent(PlayerController player, BanType type, String message) {
 		super(player);
 
 		this.type = type;

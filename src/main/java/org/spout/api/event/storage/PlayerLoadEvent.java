@@ -28,7 +28,7 @@ package org.spout.api.event.storage;
 
 import org.spout.api.event.Event;
 import org.spout.api.event.HandlerList;
-import org.spout.api.player.Player;
+import org.spout.api.player.PlayerController;
 
 /**
  * Called when data about a player needs to be loaded, usually right after a player session begins.
@@ -36,8 +36,8 @@ import org.spout.api.player.Player;
 public class PlayerLoadEvent extends Event {
 	private static HandlerList handlers = new HandlerList();
 	private boolean loaded = false;
-	private Player player;
-	public PlayerLoadEvent(Player player) {
+	private PlayerController player;
+	public PlayerLoadEvent(PlayerController player) {
 		this.player = player;
 	}
 
@@ -46,7 +46,7 @@ public class PlayerLoadEvent extends Event {
 	 * 
 	 * @return player
 	 */
-	public Player getPlayer() {
+	public PlayerController getPlayer() {
 		return player;
 	}
 

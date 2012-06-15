@@ -45,6 +45,7 @@ import org.spout.api.geo.World;
 import org.spout.api.inventory.RecipeManager;
 import org.spout.api.permissions.PermissionsSubject;
 import org.spout.api.player.Player;
+import org.spout.api.player.PlayerController;
 import org.spout.api.plugin.Platform;
 import org.spout.api.plugin.PluginManager;
 import org.spout.api.plugin.ServiceManager;
@@ -94,7 +95,7 @@ public interface Engine extends Named {
 	 *
 	 * @return array of all active players
 	 */
-	public Player[] getOnlinePlayers();
+	public PlayerController[] getOnlinePlayers();
 
 	/**
 	 * Gets the maximum number of players this game can host, or -1 if infinite
@@ -139,7 +140,7 @@ public interface Engine extends Named {
 	 * Broadcasts the given message to all players
 	 *
 	 * The implementation of broadcast is identical to iterating over
-	 * {@link #getOnlinePlayers()} and invoking {@link Player#sendMessage(String)} for
+	 * {@link #getOnlinePlayers()} and invoking {@link PlayerController#sendMessage(String)} for
 	 * each player.
 	 *
 	 * @param message to send
@@ -246,7 +247,7 @@ public interface Engine extends Named {
 	 * @param exact Whether to use exact lookup
 	 * @return Player if found, else null
 	 */
-	public Player getPlayer(String name, boolean exact);
+	public PlayerController getPlayer(String name, boolean exact);
 
 	/**
 	 * Matches the given username to all players that contain it in their name.
@@ -257,7 +258,7 @@ public interface Engine extends Named {
 	 * @param name to match
 	 * @return Collection of all possible matches
 	 */
-	public Collection<Player> matchPlayer(String name);
+	public Collection<PlayerController> matchPlayer(String name);
 
 	/**
 	 * Searches for an actively loaded world that exactly matches the given

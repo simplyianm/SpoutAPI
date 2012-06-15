@@ -27,37 +27,24 @@
 package org.spout.api.entity.component;
 
 import java.io.Serializable;
-import org.spout.api.datatable.DataMap;
-import org.spout.api.datatable.DatatableMap;
-import org.spout.api.datatable.GenericDatatableMap;
 import org.spout.api.entity.Entity;
 import org.spout.api.entity.EntityComponent;
-import org.spout.api.entity.component.controller.PlayerController;
 import org.spout.api.entity.component.controller.type.ControllerType;
 import org.spout.api.geo.cuboid.Block;
 import org.spout.api.map.DefaultedMap;
 
-public abstract class Controller extends EntityComponent {
-	private final ControllerType type;
-	private final DatatableMap datatableMap = new GenericDatatableMap();
-	private final DataMap dataMap = new DataMap(datatableMap);
-
-	protected Controller(ControllerType type) {
-		this.type = type;
-	}
+public interface Controller extends EntityComponent {
 
 	/**
 	 * Called when this controller is detached from the entity (normally due to the entity dieing or being removed from the world).
 	 * Occurs before the Pre-Snapshot of the tick.
 	 */
-	public void onDeath() {
-	}
+	public void onDeath();
 
 	/**
 	 * Called when this controller is being synced with the client. Occurs before Pre-Snapshot of the tick.
 	 */
-	public void onSync() {
-	}
+	public void onSync();
 
 	/**
 	 * TODO: These methods should be given the appropriate annotation that makes it clear they shouldn't be used by plugins.
@@ -66,33 +53,25 @@ public abstract class Controller extends EntityComponent {
 	 * Called just before a snapshot update. This is intended purely as a monitor based step.
 	 * NO updates should be made to the entity at this stage. It can be used to send packets for network update.
 	 */
-	public void preSnapshot() {
-	}
+	public void preSnapshot();
 
 	/**
 	 * Called just before the pre-snapshot stage.
 	 * This stage can make changes but they should be checked to make sure they
 	 * are non-conflicting.
 	 */
-	public void finalizeTick() {
-	}
+	public void finalizeTick();
 
-	public void onCollide(Entity other) {
+	public void onCollide(Entity other);
 
-	}
-
-	public void onCollide(Block other) {
-
-	}
+	public void onCollide(Block other);
 
 	/**
 	 * Returns the type of controller
 	 * 
 	 * @return controller type
 	 */
-	public ControllerType getType() {
-		return type;
-	}
+	public ControllerType getType();
 	
 	/**
 	 * Gets a map of persistent string mapped serializable values attached to this controller.
@@ -102,9 +81,7 @@ public abstract class Controller extends EntityComponent {
 	 * 
 	 * @return thread-safe persistent storage map
 	 */
-	public DefaultedMap<String, Serializable> data() {
-		return dataMap;
-	}
+	public DefaultedMap<String, Serializable> data();
 	
 	/**
 	 * Called immediately <i>before</i> a controller and it's parent entity are
@@ -116,9 +93,7 @@ public abstract class Controller extends EntityComponent {
 	 * all live values are copied to their stable snapshot. Data
 	 * is unstable so no reads are permitted during this stage.
 	 */
-	public void onSave() {
-		
-	}
+	public void onSave();
 	
 	/**
 	 * Called when this controller is attached to an entity.
@@ -126,17 +101,14 @@ public abstract class Controller extends EntityComponent {
 	 * If this controller was serialized and deserialized, any serializable
 	 * information stored in {@link #data()} will be available.
 	 */
-	@Override
-	public abstract void onAttached();
+	public void onAttached();
 	
 	/**
 	 * True if this controller and it's parent entity should be saved.
 	 * 
 	 * @return save
 	 */
-	public boolean isSavable() {
-		return true;
-	}
+	public boolean isSavable();
 
 	/**
 	 * Is important is a hint to the entity manager that this controller should be
@@ -156,10 +128,5 @@ public abstract class Controller extends EntityComponent {
 	 * to be important. Players are also always considered important.
 	 * @return important
 	 */
-	public boolean isImportant() {
-		if (getParent() != null) {
-			return getParent().isObserver();
-		}
-		return this instanceof PlayerController;
-	}
+	public boolean isImportant();
 }

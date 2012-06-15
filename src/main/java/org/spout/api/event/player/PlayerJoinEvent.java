@@ -27,7 +27,7 @@
 package org.spout.api.event.player;
 
 import org.spout.api.event.HandlerList;
-import org.spout.api.player.Player;
+import org.spout.api.player.PlayerController;
 
 /**
  * Called when a player joins.
@@ -37,7 +37,7 @@ public class PlayerJoinEvent extends PlayerEvent {
 	
 	private String message;
 
-	public PlayerJoinEvent(Player p, String joinMessage) {
+	public PlayerJoinEvent(PlayerController p, String joinMessage) {
 		super(p);
 		this.message = joinMessage;
 	}

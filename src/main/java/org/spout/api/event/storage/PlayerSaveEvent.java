@@ -28,7 +28,7 @@ package org.spout.api.event.storage;
 
 import org.spout.api.event.Event;
 import org.spout.api.event.HandlerList;
-import org.spout.api.player.Player;
+import org.spout.api.player.PlayerController;
 
 /**
  * Called when data about a player needs to be saved, usually right after a player session terminates.
@@ -36,8 +36,8 @@ import org.spout.api.player.Player;
 public class PlayerSaveEvent extends Event {
 	private static HandlerList handlers = new HandlerList();
 	private boolean saved = false;
-	private Player player;
-	public PlayerSaveEvent(Player player) {
+	private PlayerController player;
+	public PlayerSaveEvent(PlayerController player) {
 		this.player = player;
 	}
 
@@ -46,7 +46,7 @@ public class PlayerSaveEvent extends Event {
 	 * 
 	 * @return player
 	 */
-	public Player getPlayer() {
+	public PlayerController getPlayer() {
 		return player;
 	}
 

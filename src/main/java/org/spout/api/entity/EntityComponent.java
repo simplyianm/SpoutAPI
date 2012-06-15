@@ -29,35 +29,28 @@ package org.spout.api.entity;
 import org.spout.api.Tickable;
 import org.spout.api.entity.Entity;
 
-public abstract class EntityComponent implements Tickable {
-	private Entity parent;
+public interface EntityComponent extends Tickable {
 
 	/**
 	 * Called when this controller is attached to an entity.
 	 * @param e entity this controller will be attached to.
 	 */
-	public final void attachToEntity(Entity e) {
-		this.parent = e;
-	}
+	public void attachToEntity(Entity e);
 
 	/**
 	 * Gets the parent Entity associated with this controller.
 	 *
 	 * @return parent Entity
 	 */
-	public final Entity getParent() {
-		return this.parent;
-	}
+	public Entity getParent();
 
 	/**
 	 * Called when this component is attached to an entity.
 	 */
-	public abstract void onAttached();
+	public void onAttached();
 
 	/** 
 	 * Called when this component is detached from an entity.
 	 */
-	public void onDetached() {
-		
-	}
+	public void onDetached();
 }
