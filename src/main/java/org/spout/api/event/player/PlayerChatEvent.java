@@ -28,7 +28,7 @@ package org.spout.api.event.player;
 
 import org.spout.api.event.Cancellable;
 import org.spout.api.event.HandlerList;
-import org.spout.api.player.PlayerController;
+import org.spout.api.player.Player;
 
 /**
  * Called when a player speaks in chat.
@@ -39,7 +39,7 @@ public class PlayerChatEvent extends PlayerEvent implements Cancellable {
 	private String message;
 	private String format = "<%1$s> %2$s";
 
-	public PlayerChatEvent(PlayerController p, String message) {
+	public PlayerChatEvent(Player p, String message) {
 		super(p);
 		this.message = message;
 	}

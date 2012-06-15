@@ -29,7 +29,7 @@ package org.spout.api.event.player;
 import org.spout.api.event.Cancellable;
 import org.spout.api.event.HandlerList;
 import org.spout.api.keyboard.Keyboard;
-import org.spout.api.player.PlayerController;
+import org.spout.api.player.Player;
 
 public class PlayerKeyEvent extends PlayerEvent implements Cancellable {
 	private static HandlerList handlers = new HandlerList();
@@ -38,7 +38,7 @@ public class PlayerKeyEvent extends PlayerEvent implements Cancellable {
 
 	private boolean pressed;
 
-	public PlayerKeyEvent(PlayerController p) {
+	public PlayerKeyEvent(Player p) {
 		super(p);
 	}
 

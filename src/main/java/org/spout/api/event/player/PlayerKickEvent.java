@@ -27,7 +27,7 @@
 package org.spout.api.event.player;
 
 import org.spout.api.event.Cancellable;
-import org.spout.api.player.PlayerController;
+import org.spout.api.player.Player;
 
 /**
  * Called when a player gets kicked from the server
@@ -35,7 +35,7 @@ import org.spout.api.player.PlayerController;
 public class PlayerKickEvent extends PlayerLeaveEvent implements Cancellable {
 	private String kickReason;
 
-	public PlayerKickEvent(PlayerController p, String leaveMessage, String reason) {
+	public PlayerKickEvent(Player p, String leaveMessage, String reason) {
 		super(p, leaveMessage);
 		kickReason = reason;
 	}

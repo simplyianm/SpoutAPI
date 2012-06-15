@@ -27,7 +27,7 @@
 package org.spout.api.event.player;
 
 import org.spout.api.event.HandlerList;
-import org.spout.api.player.PlayerController;
+import org.spout.api.player.Player;
 
 /**
  * Stores details for players attempting to log in
@@ -39,7 +39,7 @@ public class PlayerLoginEvent extends PlayerEvent {
 
 	private boolean allowed = true;
 
-	public PlayerLoginEvent(PlayerController p) {
+	public PlayerLoginEvent(Player p) {
 		super(p);
 	}
 

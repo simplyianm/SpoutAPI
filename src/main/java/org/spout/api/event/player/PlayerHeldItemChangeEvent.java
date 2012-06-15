@@ -48,14 +48,14 @@ package org.spout.api.event.player;
 
 import org.spout.api.event.Cancellable;
 import org.spout.api.event.HandlerList;
-import org.spout.api.player.PlayerController;
+import org.spout.api.player.Player;
 
 public class PlayerHeldItemChangeEvent extends PlayerEvent implements Cancellable {
 	private static HandlerList handlers = new HandlerList();
 
 	private final int oldSlot, newSlot;
 
-	public PlayerHeldItemChangeEvent(PlayerController p, int oldSlot, int newSlot) {
+	public PlayerHeldItemChangeEvent(Player p, int oldSlot, int newSlot) {
 		super(p);
 		this.oldSlot = oldSlot;
 		this.newSlot = newSlot;

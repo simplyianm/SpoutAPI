@@ -30,7 +30,7 @@ import org.spout.api.event.Cancellable;
 import org.spout.api.event.HandlerList;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.inventory.ItemStack;
-import org.spout.api.player.PlayerController;
+import org.spout.api.player.Player;
 
 public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
 	private static final HandlerList handlers = new HandlerList();
@@ -43,7 +43,7 @@ public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
 
 	private final boolean isAir;
 
-	public PlayerInteractEvent(PlayerController p, Point interactedPoint, ItemStack heldItem, Action action, boolean isAir) {
+	public PlayerInteractEvent(Player p, Point interactedPoint, ItemStack heldItem, Action action, boolean isAir) {
 		super(p);
 		this.interactedPoint = interactedPoint;
 		this.heldItem = heldItem;
