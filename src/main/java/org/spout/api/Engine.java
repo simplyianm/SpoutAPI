@@ -140,7 +140,7 @@ public interface Engine extends Named {
 	 * Broadcasts the given message to all players
 	 *
 	 * The implementation of broadcast is identical to iterating over
-	 * {@link #getOnlinePlayers()} and invoking {@link PlayerController#sendMessage(String)} for
+	 * {@link #getOnlinePlayers()} and invoking {@link Player#sendMessage(String)} for
 	 * each player.
 	 *
 	 * @param message to send
@@ -217,19 +217,27 @@ public interface Engine extends Named {
 	 * @return data
 	 */
 	public File getDataFolder();
-	
+
 	/**
 	 * Gets the entity with the matching unique id
 	 * <br/> <br/>
 	 * Performs a search on each world and then searches each world respectively
 	 * for the entity, stopping when it is found, or after all the worlds have
 	 * been searched upon failure.
-	 * 
+	 *
 	 * @param uid to search and match
 	 * @return entity that matched the uid, or null if none was found
 	 */
 	@SnapshotRead
 	public Entity getEntity(UUID uid);
+
+	/**
+	 * @see #getPlayer(String, boolean, boolean)
+	 * @param name to look up
+	 * @param exact Whether to use exact lookup
+	 * @return Player if found, else null
+	 */
+	public Player getPlayer(String name, boolean exact);
 
 	/**
 	 * Gets the player by the given username. <br/>
@@ -241,13 +249,18 @@ public interface Engine extends Named {
 	 * to the given name, by comparing the length of other player names that
 	 * start with the given parameter. <br/>
 	 * <br/>
-	 * This method is case-insensitive.
+	 * This method is case-insensitive.<br/>
+	 *
+	 * When offline is true, this method will look at both offline and online players for a result.
+	 * If no player is present and offline and exact are both {@code true}, a new player
+	 * will be created with {@code name}.
 	 *
 	 * @param name to look up
 	 * @param exact Whether to use exact lookup
+	 * @param offline Whether to allow offline player lookup and creation
 	 * @return Player if found, else null
 	 */
-	public Player getPlayer(String name, boolean exact);
+	public Player getPlayer(String name, boolean exact, boolean offline);
 
 	/**
 	 * Matches the given username to all players that contain it in their name.
@@ -529,17 +542,17 @@ public interface Engine extends Named {
 	 * @return A list of all commands at the time.
 	 */
 	public String[] getAllCommands();
-	
-	
+
+
 	/**
 	 * Gets an abstract representation of the engine Filesystem.
-	 * 
-	 * The Filesystem handles the loading of all resources. 
-	 * 
-	 * On the client, loading a resource will load the resource from the harddrive.  
+	 *
+	 * The Filesystem handles the loading of all resources.
+	 *
+	 * On the client, loading a resource will load the resource from the harddrive.
 	 * On the server, it will notify all clients to load the resource, as well as provide a representation of that resource.
-	 * 
+	 *
 	 */
 	public FileSystem getFilesystem();
-	
+
 }
