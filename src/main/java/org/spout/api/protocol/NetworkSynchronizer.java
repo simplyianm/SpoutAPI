@@ -48,7 +48,6 @@ import org.spout.api.material.BlockMaterial;
 import org.spout.api.math.IntVector3;
 import org.spout.api.math.Quaternion;
 import org.spout.api.player.Player;
-import org.spout.api.player.PlayerController;
 import org.spout.api.protocol.event.ProtocolEvent;
 import org.spout.api.protocol.event.ProtocolEventExecutor;
 import org.spout.api.protocol.event.ProtocolEventListener;
@@ -57,15 +56,13 @@ import org.spout.api.util.OutwardIterator;
 
 public abstract class NetworkSynchronizer implements InventoryViewer {
 	protected final Player owner;
-	protected Entity entity;
 	protected final Session session;
 
-	public NetworkSynchronizer(Player owner, Session session, Entity entity) {
+	public NetworkSynchronizer(Player owner) {
 		this.owner = owner;
-		this.entity = entity;
-		entity.setObserver(true);
-		this.session = session;
-		blockViewDistance = entity.getViewDistance();
+		this.owner.setObserver(true);
+		this.session = owner.getSession();
+		blockViewDistance = this.owner.getViewDistance();
 		viewDistance = blockViewDistance >> Chunk.BLOCKS.BITS;
 		targetSize = blockViewDistance / 2;
 	}
@@ -98,10 +95,6 @@ public abstract class NetworkSynchronizer implements InventoryViewer {
 
 	public void setPositionDirty() {
 		teleported = true;
-	}
-
-	public Entity getEntity() {
-		return entity;
 	}
 
 	public Player getOwner() {
@@ -170,7 +163,6 @@ public abstract class NetworkSynchronizer implements InventoryViewer {
 	public void onDeath() {
 		TickStage.checkStage(TickStage.FINALIZE);
 		death = true;
-		entity = null;
 		for (Point p : initializedChunks) {
 			removeObserver(p);
 		}
@@ -182,12 +174,12 @@ public abstract class NetworkSynchronizer implements InventoryViewer {
 	 * are non-conflicting.
 	 */
 	public void finalizeTick() {
-		if (entity == null || entity.isDead()) {
+		if (owner == null || owner.isDead()) {
 			return;
 		}
 
 		// TODO teleport smoothing
-		Point currentPosition = entity.getPosition();
+		Point currentPosition = owner.getPosition();
 		if (currentPosition != null) {
 			if (currentPosition.getManhattanDistance(lastChunkCheck) > Chunk.BLOCKS.SIZE >> 1) {
 				checkChunkUpdates(currentPosition);
@@ -276,13 +268,13 @@ public abstract class NetworkSynchronizer implements InventoryViewer {
 				tickTimeRemaining = Spout.getScheduler().getRemainingTickTime() > 0;
 			}
 
-			if (teleported && entity != null) {
-				Point ep = entity.getPosition();
+			if (teleported && owner != null) {
+				Point ep = owner.getPosition();
 				if (worldChanged) {
 					worldChanged(ep.getWorld());
 					worldChanged = false;
 				}
-				sendPosition(entity.getPosition(), entity.getRotation());
+				sendPosition(owner.getPosition(), owner.getRotation());
 				first = false;
 				teleported = false;
 			}
@@ -391,9 +383,9 @@ public abstract class NetworkSynchronizer implements InventoryViewer {
 	}
 
 	/**
-	 * Gets the entity protocol manager
+	 * Gets the owner protocol manager
 	 *
-	 * @return the entity protocol manager
+	 * @return the owner protocol manager
 	 */
 	public EntityProtocol getEntityProtocol() {
 		throw new IllegalStateException("No entity protocol available for core class");

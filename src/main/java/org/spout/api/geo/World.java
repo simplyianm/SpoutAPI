@@ -41,7 +41,7 @@ import org.spout.api.generator.WorldGenerator;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.geo.discrete.Transform;
 import org.spout.api.map.DefaultedMap;
-import org.spout.api.player.PlayerController;
+import org.spout.api.player.Player;
 import org.spout.api.plugin.Plugin;
 import org.spout.api.scheduler.TaskManager;
 import org.spout.api.util.cuboid.CuboidBuffer;
@@ -266,7 +266,7 @@ public interface World extends Source, AreaRegionAccess {
 	 *
 	 * @return all players on this world
 	 */
-	public Set<PlayerController> getPlayers();
+	public Set<Player> getPlayers();
 
 	/**
 	 * Gets the directory where world data is stored
@@ -310,7 +310,7 @@ public interface World extends Source, AreaRegionAccess {
 	 */
 	@LiveRead
 	@Threadsafe
-	public Set<PlayerController> getNearbyPlayers(Point position, int range);
+	public Set<Player> getNearbyPlayers(Point position, int range);
 
 	/**
 	 * Gets a set of nearby players to the entity, inside of the range
@@ -321,7 +321,7 @@ public interface World extends Source, AreaRegionAccess {
 	 */
 	@LiveRead
 	@Threadsafe
-	public Set<PlayerController> getNearbyPlayers(Entity entity, int range);
+	public Set<Player> getNearbyPlayers(Entity entity, int range);
 
 	/**
 	 * Gets a set of nearby players to the point, inside of the range.
@@ -334,7 +334,7 @@ public interface World extends Source, AreaRegionAccess {
 	 */
 	@LiveRead
 	@Threadsafe
-	public Set<PlayerController> getNearbyPlayers(Point position, Entity ignore, int range);
+	public Set<Player> getNearbyPlayers(Point position, Entity ignore, int range);
 
 	/**
 	 * Gets the absolute closest player from the specified point within a specified range.
@@ -345,7 +345,7 @@ public interface World extends Source, AreaRegionAccess {
 	 */
 	@LiveRead
 	@Threadsafe
-	public PlayerController getNearestPlayer(Point position, Entity ignore, int range);
+	public Player getNearestPlayer(Point position, Entity ignore, int range);
 
 	/**
 	 * Gets the absolute closest player from the specified point within a specified range.
@@ -357,7 +357,7 @@ public interface World extends Source, AreaRegionAccess {
 	 */
 	@LiveRead
 	@Threadsafe
-	public PlayerController getNearestPlayer(Point position, int range);
+	public Player getNearestPlayer(Point position, int range);
 
 	/**
 	 * Gets the absolute closest player from the specified point within a specified range.
@@ -368,7 +368,7 @@ public interface World extends Source, AreaRegionAccess {
 	 */
 	@LiveRead
 	@Threadsafe
-	public PlayerController getNearestPlayer(Entity entity, int range);
+	public Player getNearestPlayer(Entity entity, int range);
 	
 	/**
 	 * Sets the cuboid area to the values inside of the cuboid buffer.
