@@ -236,10 +236,14 @@ public abstract class Region extends Cube implements AreaChunkAccess, AreaPhysic
 
 	/**
 	 * Gets the gravity applied to this region
-	 * @return float representing the gravity
+	 * @return Vector3 representing the gravity
 	 */
 	public abstract Vector3 getGravity();
 
+	/**
+	 * Sets the gravity applied to this regionm
+	 * @param gravity Vector3 representing the gravity
+	 */
 	public abstract void setGravity(Vector3 gravity);
 
 	@Override
