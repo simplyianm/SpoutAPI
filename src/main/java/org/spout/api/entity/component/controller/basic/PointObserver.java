@@ -71,7 +71,6 @@ public class PointObserver extends Controller {
 
 	@Override
 	public void onAttached() {
-		getParent().setCollision(null);
 		getParent().setObserver(true);
 		getParent().setViewDistance(viewDistance << Chunk.BLOCKS.BITS);
 		currPoint = getParent().getPosition();

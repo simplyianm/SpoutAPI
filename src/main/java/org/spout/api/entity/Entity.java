@@ -29,7 +29,6 @@ package org.spout.api.entity;
 import java.util.UUID;
 
 import org.spout.api.Source;
-import org.spout.api.collision.CollisionModel;
 import org.spout.api.entity.component.Controller;
 import org.spout.api.geo.World;
 import org.spout.api.geo.cuboid.Chunk;
@@ -79,10 +78,6 @@ public interface Entity extends Source {
 	public void setModel(Model model);
 
 	public Model getModel();
-
-	public void setCollision(CollisionModel model);
-
-	public CollisionModel getCollision();
 	
 	/**
 	 * Gets the entity's persistent unique id. 
