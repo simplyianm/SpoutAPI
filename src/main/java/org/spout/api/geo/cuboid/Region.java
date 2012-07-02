@@ -37,6 +37,7 @@ import org.spout.api.geo.LoadOption;
 import org.spout.api.geo.World;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.math.BitSize;
+import org.spout.api.math.Vector3;
 import org.spout.api.player.Player;
 import org.spout.api.scheduler.TaskManager;
 import org.spout.api.util.thread.DelayedWrite;
@@ -232,7 +233,15 @@ public abstract class Region extends Cube implements AreaChunkAccess, AreaPhysic
 	 * Gets the TaskManager associated with this region
 	 */
 	public abstract TaskManager getTaskManager();
-	
+
+	/**
+	 * Gets the gravity applied to this region
+	 * @return float representing the gravity
+	 */
+	public abstract Vector3 getGravity();
+
+	public abstract void setGravity(Vector3 gravity);
+
 	@Override
 	public Iterator<Chunk> iterator() {
 		return new ChunkIterator();
