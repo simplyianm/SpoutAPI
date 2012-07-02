@@ -28,6 +28,8 @@ package org.spout.api.material;
 
 import java.util.Arrays;
 
+import com.bulletphysics.collision.shapes.CollisionShape;
+
 import org.spout.api.entity.Entity;
 import org.spout.api.event.player.PlayerInteractEvent.Action;
 import org.spout.api.geo.cuboid.Block;
@@ -424,4 +426,8 @@ public abstract class Material extends MaterialRegistry implements MaterialSourc
 	public String toString() {
 		return "Material {" + getName() + "}";
 	}
+
+	public abstract CollisionShape getCollision();
+
+	public abstract void setCollision(CollisionShape shape);
 }

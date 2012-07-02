@@ -248,6 +248,10 @@ public abstract class Region extends Cube implements AreaChunkAccess, AreaPhysic
 	 */
 	public abstract void setGravity(Vector3 gravity);
 
+	/**
+	 * Gets the simulation world used to simulate physics and collisions.
+	 * @return DynamicsWorld object representing the simulation
+	 */
 	public abstract DynamicsWorld getSimulation();
 
 

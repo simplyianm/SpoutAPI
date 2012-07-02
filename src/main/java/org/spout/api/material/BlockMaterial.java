@@ -26,6 +26,9 @@
  */
 package org.spout.api.material;
 
+import com.bulletphysics.collision.shapes.BoxShape;
+import com.bulletphysics.collision.shapes.CollisionShape;
+
 import org.spout.api.entity.Entity;
 import org.spout.api.entity.component.controller.BlockController;
 import org.spout.api.entity.component.controller.type.ControllerType;
@@ -46,7 +49,8 @@ public class BlockMaterial extends Material implements Placeable {
 	public static final BlockMaterial UNBREAKABLE = new BlockMaterial("Unbreakable").setHardness(100.f);
 	public static final BlockMaterial SKYBOX = new BasicSkyBox();
 	public static final BlockMaterial ERROR = new BlockMaterial("Missing Plugin").setHardness((100.f));
-	
+	private static CollisionShape shape = new BoxShape(1f, 1f, 1f);
+
 	public BlockMaterial(String name) {
 		super(name);
 	}
@@ -169,7 +173,17 @@ public class BlockMaterial extends Material implements Placeable {
 	public BlockMaterial getSubMaterial(short data) {
 		return (BlockMaterial) super.getSubMaterial(data);
 	}
-	
+
+	@Override
+	public CollisionShape getCollision() {
+		return shape;
+	}
+
+	@Override
+	public void setCollision(CollisionShape shape) {
+		this.shape = shape;
+	}
+
 	/**
 	 * Gets the friction of this block
 	 * 

@@ -28,6 +28,8 @@ package org.spout.api.entity;
 
 import java.util.UUID;
 
+import com.bulletphysics.collision.shapes.CollisionShape;
+
 import org.spout.api.Source;
 import org.spout.api.entity.component.Controller;
 import org.spout.api.geo.World;
@@ -379,4 +381,10 @@ public interface Entity extends Source {
 	 * @param component
 	 */
 	public boolean hasComponent(EntityComponent component);
+
+	public CollisionShape getCollision();
+
+	public void setCollisionShape(CollisionShape shape);
+
+
 }
