@@ -29,6 +29,8 @@ package org.spout.api.geo.cuboid;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.bulletphysics.dynamics.DynamicsWorld;
+
 import org.spout.api.entity.component.Controller;
 import org.spout.api.entity.Entity;
 import org.spout.api.geo.AreaChunkAccess;
@@ -246,6 +248,9 @@ public abstract class Region extends Cube implements AreaChunkAccess, AreaPhysic
 	 */
 	public abstract void setGravity(Vector3 gravity);
 
+	public abstract DynamicsWorld getSimulation();
+
+
 	@Override
 	public Iterator<Chunk> iterator() {
 		return new ChunkIterator();
@@ -292,6 +297,5 @@ public abstract class Region extends Cube implements AreaChunkAccess, AreaPhysic
 		public void remove() {
 			throw new UnsupportedOperationException("Operation not supported");
 		}
-		
 	}
 }
