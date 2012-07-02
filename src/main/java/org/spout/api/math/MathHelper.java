@@ -26,6 +26,9 @@
  */
 package org.spout.api.math;
 
+import javax.vecmath.Vector2f;
+import javax.vecmath.Vector3f;
+import javax.vecmath.Vector4f;
 import java.awt.Color;
 
 /**
@@ -751,6 +754,19 @@ public class MathHelper {
 	}
 
 	/* Vector3 Helpers */
+
+	public static Vector2f toVector2f(Vector2 toConvert) {
+		return new Vector2f(toConvert.getX(), toConvert.getY());
+	}
+
+	public static Vector3f toVector3f(Vector3 toConvert) {
+		return new Vector3f(toConvert.getX(), toConvert.getY(), toConvert.getZ());
+	}
+
+	public static Vector4f toVector4f(Vector4 toConvert) {
+		return new Vector4f(toConvert.getW(), toConvert.getX(), toConvert.getY(), toConvert.getZ());
+	}
+
 	/**
 	 * Returns the length of the given vector.
 	 *
