@@ -28,8 +28,6 @@ package org.spout.api.event.player;
 
 import org.spout.api.event.Event;
 import org.spout.api.event.HandlerList;
-import org.spout.api.player.Player;
-import org.spout.api.player.PlayerController;
 import org.spout.api.protocol.Session;
 
 public class PlayerConnectEvent extends Event {
@@ -37,10 +35,8 @@ public class PlayerConnectEvent extends Event {
 
 	private final Session session;
 	private final String playerName;
-	private final Player player;
 
-	public PlayerConnectEvent(Player player, Session session, String playerName) {
-		this.player = player;
+	public PlayerConnectEvent(Session session, String playerName) {
 		this.session = session;
 		this.playerName = playerName;
 	}
@@ -51,10 +47,6 @@ public class PlayerConnectEvent extends Event {
 
 	public String getPlayerName() {
 		return playerName;
-	}
-
-	public PlayerController getController() {
-		return player.getController();
 	}
 
 	@Override

@@ -137,6 +137,12 @@ public interface Session {
 	 * @return Player
 	 */
 	public Player getPlayer();
+	
+	/**
+	 * Checks if this session has a player associated with it.
+	 * @return true if it has a player associated with it.
+	 */
+	public boolean hasPlayer();
 
 	public enum State {
 		/**

@@ -36,11 +36,10 @@ public abstract class MessageHandler<T extends Message> {
 	 * Otherwise, it will call handleServer or handleClient as required.
 	 *
 	 * @param session the network session
-	 * @param player the player
 	 * @param message the message that was received
 	 */
-	public void handle(Session session, Player player, T message) {
-		handleServer(session, player, message);
+	public void handle(Session session, T message) {
+		handleServer(session, message);
 	}
 
 	/**
@@ -50,10 +49,9 @@ public abstract class MessageHandler<T extends Message> {
 	 * received from the client by the server.
 	 *
 	 * @param session the network session
-	 * @param player the player
 	 * @param message the message that was received
 	 */
-	public void handleServer(Session session, Player player, T message) {
+	public void handleServer(Session session, T message) {
 	}
 
 	/**
@@ -63,9 +61,8 @@ public abstract class MessageHandler<T extends Message> {
 	 * received from the server by the client.
 	 *
 	 * @param session the network session
-	 * @param player the player
 	 * @param message the message that was received
 	 */
-	public void handleClient(Session session, Player player, T message) {
+	public void handleClient(Session session, T message) {
 	}
 }
