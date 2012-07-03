@@ -26,9 +26,6 @@
  */
 package org.spout.api.material;
 
-import com.bulletphysics.collision.shapes.BoxShape;
-import com.bulletphysics.collision.shapes.CollisionShape;
-
 import org.spout.api.entity.Entity;
 import org.spout.api.entity.component.controller.BlockController;
 import org.spout.api.entity.component.controller.type.ControllerType;
@@ -49,12 +46,17 @@ public class BlockMaterial extends Material implements Placeable {
 	public static final BlockMaterial UNBREAKABLE = new BlockMaterial("Unbreakable").setHardness(100.f);
 	public static final BlockMaterial SKYBOX = new BasicSkyBox();
 	public static final BlockMaterial ERROR = new BlockMaterial("Missing Plugin").setHardness((100.f));
-	private static CollisionShape shape = new BoxShape(1f, 1f, 1f);
+
+	private ByteFlagContainer occlusion = new ByteFlagContainer(BlockFaces.NESWBT);
+	private float hardness = 0F;
+	private float friction = 0F;
+	private byte opacity = 0xF;
+	private ControllerType controller = null;
 
 	public BlockMaterial(String name) {
 		super(name);
 	}
-	
+
 	public BlockMaterial(short dataMask, String name) {
 		super(dataMask, name);
 	}
@@ -101,12 +103,6 @@ public class BlockMaterial extends Material implements Placeable {
 
 		return (BlockMaterial) mat;
 	}
-
-	private ByteFlagContainer occlusion = new ByteFlagContainer(BlockFaces.NESWBT);
-	private float hardness = 0F;
-	private float friction = 0F;
-	private byte opacity = 0xF;
-	private ControllerType controller = null;
 
 	/**
 	 * Sets the block controller associated with this material<br>
@@ -172,16 +168,6 @@ public class BlockMaterial extends Material implements Placeable {
 	@Override
 	public BlockMaterial getSubMaterial(short data) {
 		return (BlockMaterial) super.getSubMaterial(data);
-	}
-
-	@Override
-	public CollisionShape getCollision() {
-		return shape;
-	}
-
-	@Override
-	public void setCollision(CollisionShape shape) {
-		this.shape = shape;
 	}
 
 	/**

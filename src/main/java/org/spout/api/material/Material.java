@@ -28,6 +28,7 @@ package org.spout.api.material;
 
 import java.util.Arrays;
 
+import com.bulletphysics.collision.dispatch.CollisionObject;
 import com.bulletphysics.collision.shapes.CollisionShape;
 
 import org.spout.api.entity.Entity;
@@ -53,6 +54,7 @@ public abstract class Material extends MaterialRegistry implements MaterialSourc
 	private Material[] submaterialsContiguous = null;
 	private volatile boolean submaterialsDirty = true;
 	private final short dataMask;
+	private final CollisionObject collision = new CollisionObject();
 
 	/**
 	 * Creates and registers a material
@@ -68,7 +70,7 @@ public abstract class Material extends MaterialRegistry implements MaterialSourc
 		this.id = (short) MaterialRegistry.register(this);
 		this.dataMask = 0;
 	}
-	
+
 	/**
 	 * Creates and registers a material
 	 * 
@@ -427,7 +429,15 @@ public abstract class Material extends MaterialRegistry implements MaterialSourc
 		return "Material {" + getName() + "}";
 	}
 
-	public abstract CollisionShape getCollision();
+	public CollisionObject getCollision() {
+		return collision;
+	}
 
-	public abstract void setCollision(CollisionShape shape);
+	public CollisionShape getCollisionShape() {
+		return collision.getCollisionShape();
+	}
+
+	public void setCollisionShape(CollisionShape shape) {
+		this.collision.setCollisionShape(shape);
+	}
 }
