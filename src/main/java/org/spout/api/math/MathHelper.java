@@ -26,6 +26,7 @@
  */
 package org.spout.api.math;
 
+import javax.vecmath.Quat4f;
 import javax.vecmath.Vector2f;
 import javax.vecmath.Vector3f;
 import javax.vecmath.Vector4f;
@@ -602,6 +603,14 @@ public class MathHelper {
 	}
 
 	/* Quaterion Helpers */
+	
+	public static Quat4f toQuaternionf(Quaternion q) {
+		return new Quat4f(q.x, q.y, q.z, q.w);
+	}
+
+	public static Quaternion toQuaternion(Quat4f q) {
+		return new Quaternion(q.x, q.y, q.z, q.w);
+	}
 
 	/**
 	 * Returns the length squared of the given Quaternion
@@ -758,13 +767,25 @@ public class MathHelper {
 	public static Vector2f toVector2f(Vector2 toConvert) {
 		return new Vector2f(toConvert.getX(), toConvert.getY());
 	}
+	
+	public static Vector2 toVector2(Vector2f toConvert) {
+		return new Vector2(toConvert.x, toConvert.y);
+	}
 
 	public static Vector3f toVector3f(Vector3 toConvert) {
 		return new Vector3f(toConvert.getX(), toConvert.getY(), toConvert.getZ());
 	}
+	
+	public static Vector3 toVector3f(Vector3f toConvert) {
+		return new Vector3(toConvert.x, toConvert.y, toConvert.z);
+	}
 
 	public static Vector4f toVector4f(Vector4 toConvert) {
-		return new Vector4f(toConvert.getW(), toConvert.getX(), toConvert.getY(), toConvert.getZ());
+		return new Vector4f(toConvert.getX(), toConvert.getY(), toConvert.getZ(), toConvert.getW());
+	}
+	
+	public static Vector4 toVector4f(Vector4f toConvert) {
+		return new Vector4(toConvert.x, toConvert.y, toConvert.z, toConvert.w);
 	}
 
 	/**
