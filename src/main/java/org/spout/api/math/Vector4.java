@@ -574,6 +574,15 @@ public class Vector4 implements Comparable<Vector4>, Serializable {
 	}
 
 	/**
+	 * Creates a new Matrix from this Vector4.
+	 * 
+	 * @return
+	 */
+	public Matrix toMatrix() {
+		return Vector4.toMatrix(this);
+	}
+
+	/**
 	 * Compares two Vector3s
 	 */
 	public int compareTo(Vector4 o) {
@@ -797,6 +806,16 @@ public class Vector4 implements Comparable<Vector4>, Serializable {
 	 */
 	public static float[] toArray(Vector4 a) {
 		return new float[] {a.x, a.y, a.z, a.w};
+	}
+
+	/**
+	 * Returns a new Matrix derived from the given Vector4.
+	 * 
+	 * @param a The Vector4
+	 * @return The Matrix
+	 */
+	public static Matrix toMatrix(Vector4 a) {
+		return new Matrix(1, a.toArray());
 	}
 
 	/**
